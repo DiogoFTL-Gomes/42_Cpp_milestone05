@@ -2,6 +2,7 @@
 # define BUREAUCRAT_H
 
 # include <string>
+# include <iostream>
 # include <exception>
 
 class Bureaucrat{
@@ -34,6 +35,9 @@ class Bureaucrat{
 			public:
 				const char	*what() const throw();
 		};
+		
 };
+
+std::ostream	&operator<<(std::ostream &out, const Bureaucrat &drone);
 
 #endif
