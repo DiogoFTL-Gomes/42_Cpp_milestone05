@@ -5,6 +5,8 @@
 # include <iostream>
 # include <exception>
 
+class Form;
+
 class Bureaucrat{
 	private:
 		const std::string	_name;
@@ -35,6 +37,8 @@ class Bureaucrat{
 			public:
 				const char	*what() const throw();
 		};
+
+		void	signForm(Form &form);
 		
 };
 

@@ -1,4 +1,5 @@
-# include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Estagiarino"), _grade(150){
 }
@@ -43,12 +44,29 @@ void	Bureaucrat::decrementGrade(){
 	this->_grade++;
 }
 
+void	Bureaucrat::signForm(Form &form){
+	try{
+		if (form.getIsSigned() == true){
+			std::cout << "Form " << form.getName() << " was already signed" << std::endl;
+		}
+		else{
+			form.beSigned(*this);
+			std::cout << _name << " signed " << form.getName() << std::endl;
+		}
+	}
+	catch (std::exception &e){
+		std::cout << _name << " couldn't sign " 
+		<< form.getName() << " because " 
+		<< e.what() << std::endl;
+	}
+}
+
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Grade too high";
+	return "Grade too high";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Grade too low";
+	return "Grade too low";
 }
 
 std::ostream	&operator<<(std::ostream &out, const Bureaucrat &paperPusher){
