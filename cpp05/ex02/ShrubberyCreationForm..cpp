@@ -1,4 +1,5 @@
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() 
 	: AForm("ShrubberyCreationForm", 145, 137), _target(""){
@@ -25,4 +26,12 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 //getter
 const std::string	&ShrubberyCreationForm::getTarget() const{
 	return (this->_target);
+}
+
+//executor
+void ShrubberyCreationForm::executeAction() const {
+	std::ofstream file((_target + "_shrubbery").c_str());
+	file << "  🌳\n";
+	file << " 🌲🌲\n";
+	file << "🌳🌳🌳\n";
 }

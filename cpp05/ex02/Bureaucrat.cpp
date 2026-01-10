@@ -46,18 +46,25 @@ void	Bureaucrat::decrementGrade(){
 
 void	Bureaucrat::signForm(AForm &form){
 	try{
-		if (form.getIsSigned() == true){
-			std::cout << YEL "Form " reset << form.getName() << YEL " was already signed" reset << std::endl;
-		}
-		else{
-			form.beSigned(*this);
-			std::cout << GRN << _name << " signed " reset << form.getName() << std::endl;
-		}
+		form.beSigned(*this);
 	}
 	catch (std::exception &e){
 		std::cout << RED << _name << " couldn't sign " reset
-		<< form.getName() << RED " because: " 
-		<< e.what() << reset << std::endl;
+			<< form.getName() << RED " because: " 
+			<< e.what() << reset << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const &form) const {
+	try{
+		form.execute(*this);
+		std::cout << this->getName() << " executed " 
+			<< form.getName() << std::endl;
+	}
+	catch (std::exception &e){
+		std::cout << this->getName() << RED "could not execute " reset 
+			<< form.getName() << RED " because " reset 
+			<< e.what() << std::endl;
 	}
 }
 

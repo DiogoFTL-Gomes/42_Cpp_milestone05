@@ -12,6 +12,13 @@ Form::Form(const std::string &name, int toSign, int toExec)
 	, _toExecGrade(checkGrade(toExec)) {
 }
 
+Form::Form(const Form &other) 
+	: _name(other.getName())
+	, _isSigned(other.getIsSigned())
+	, _toSignGrade(other.getToSignGrade())
+	, _toExecGrade(other.getToExecGrade()) {
+}
+
 Form &Form::operator=(const Form &other){
 	if (this != &other)
 		_isSigned = other._isSigned;
@@ -25,7 +32,14 @@ Form::~Form(){
 void	Form::beSigned(const Bureaucrat &bureaucrat){
 	if (bureaucrat.getGrade() > this->_toSignGrade)
 		throw GradeTooLowException();
-	this->_isSigned = true;
+	if (this->getIsSigned() == true){
+		std::cout << YEL "Form " reset << this->getName() << YEL " was already signed" reset << std::endl;
+	}
+	else{
+		this->_isSigned = true;
+		std::cout << GRN << bureaucrat.getName() 
+			<< " signed " reset << this->getName() << std::endl;
+	}
 }
 
 

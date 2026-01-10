@@ -17,6 +17,9 @@ class PresidentialPardonForm : public AForm {
 
 		//getters
 		const std::string	&getTarget() const;
+
+		//executer
+		void executeAction() const;
 };
 
 #endif

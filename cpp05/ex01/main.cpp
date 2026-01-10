@@ -80,7 +80,7 @@ void	reviewDay(int nStaff, int nForm, Form **folder){
 			countSigned++;
 	}
 	std::cout << "\nThis office, while employing " << nStaff 
-	<< " people managed to sign " << countSigned << " of " 
+	<< " people, managed to sign " << countSigned << " of " 
 	<< nForm << " forms." << std::endl;
 }
 

@@ -12,6 +12,13 @@ AForm::AForm(const std::string &name, int toSign, int toExec)
 	, _toExecGrade(checkGrade(toExec)) {
 }
 
+AForm::AForm(const AForm &other) 
+	: _name(other.getName())
+	, _isSigned(other.getIsSigned())
+	, _toSignGrade(other.getToSignGrade())
+	, _toExecGrade(other.getToExecGrade()) {
+}
+
 AForm &AForm::operator=(const AForm &other){
 	if (this != &other)
 		_isSigned = other._isSigned;
@@ -25,7 +32,14 @@ AForm::~AForm(){
 void	AForm::beSigned(const Bureaucrat &bureaucrat){
 	if (bureaucrat.getGrade() > this->_toSignGrade)
 		throw GradeTooLowException();
-	this->_isSigned = true;
+	if (this->getIsSigned() == true){
+		std::cout << YEL "Form " reset << this->getName() << YEL " was already signed" reset << std::endl;
+	}
+	else{
+		this->_isSigned = true;
+		std::cout << GRN << bureaucrat.getName() 
+			<< " signed " reset << this->getName() << std::endl;
+	}
 }
 
 
@@ -46,6 +60,15 @@ int AForm::getToExecGrade() const{
 	return (this->_toExecGrade);
 }
 
+//execution
+void AForm::execute(Bureaucrat const &executor) const {
+	if (this->getIsSigned() == false)
+		throw FormNotSignedException();
+	if (executor.getGrade() > this->getToExecGrade())
+		throw GradeTooLowException();
+	executeAction();
+}
+
 //exceptions
 const char* AForm::GradeTooHighException::what() const throw() {
 	return "Grade too high";
@@ -53,6 +76,10 @@ const char* AForm::GradeTooHighException::what() const throw() {
 
 const char* AForm::GradeTooLowException::what() const throw() {
 	return "Grade too low";
+}
+
+const char* AForm::FormNotSignedException::what() const throw() {
+	return "Form is unsigned";
 }
 
 //operator<< applied on this class
