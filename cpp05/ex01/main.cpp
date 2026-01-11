@@ -27,15 +27,15 @@ void	hireStaff(Bureaucrat **staff){
 	int i = 0;
 
 	staff[i] = new Bureaucrat("Toni", randInt(71, 150));
-	std::cout << *staff[i++] << YEL " has been hired," reset << std::endl;
+	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 	staff[i] = new Bureaucrat("Armando", randInt(21, 70));
-	std::cout << *staff[i++] << YEL " has been hired," reset << std::endl;
+	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 	staff[i] = new Bureaucrat("Esmeraldina", randInt(1, 20));
-	std::cout << *staff[i++] << YEL " has been hired," reset << std::endl;
+	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 	staff[i] = new Bureaucrat("Gervazio", randInt(75, 200));
-	std::cout << *staff[i++] << YEL " has been hired," reset << std::endl;
+	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 	staff[i] = new Bureaucrat("America", randInt(-50, 100));
-	std::cout << *staff[i++] << YEL " has been hired," reset << std::endl;
+	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 }
 
 void	createDocs(Form **folder){
@@ -85,6 +85,26 @@ void	reviewDay(int nStaff, int nForm, Form **folder){
 }
 
 int	main(void){
+	{
+		Bureaucrat	boss("Ramiro", 5);
+		std::cout << boss << YEL " has entered the office." reset << std::endl;
+
+		std::cout << "To start the day, the proper forms need to be created and signed in triplicate:" << std::endl;
+		Form	startDay("Authorize work day start", 50, 40);
+		std::cout << YEL "\n--- Form created ---\n" reset << startDay << "\n" << std::endl;
+
+		boss.signForm(startDay);
+		std::cout << "\nInstead of creating and signing two more forms, " << boss.getName() 
+			<< " just copies the \"" << startDay.getName() << "\"\n that he signed before. A serious break from procedure, but hey, he's the boss..." << std::endl;
+
+		std::cout << "\nCopying \"" << startDay.getName() << "\"" << std::endl;
+		Form	dupliForm(startDay);
+		std::cout << YEL "--- Form created ---\n" reset << dupliForm << "\n" << std::endl;
+		std::cout << "\nCopying \"" << startDay.getName() << "\"" << std::endl;
+		Form	tripliForm = startDay;
+		std::cout << YEL "--- Form created ---\n" reset << tripliForm << "\n" << std::endl;
+		std::cout << "And now, the real work is ready to start!!" << std::endl;
+	}
 	Bureaucrat	*staff[6] = {0};
 	Form		*folder[11] = {0};
 
