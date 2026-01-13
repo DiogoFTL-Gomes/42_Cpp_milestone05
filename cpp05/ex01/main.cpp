@@ -34,7 +34,7 @@ void	hireStaff(Bureaucrat **staff){
 	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 	staff[i] = new Bureaucrat("Gervazio", randInt(75, 200));
 	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
-	staff[i] = new Bureaucrat("America", randInt(-50, 100));
+	staff[i] = new Bureaucrat("Tiburcia", randInt(-50, 100));
 	std::cout << *staff[i++] << YEL " has been hired." reset << std::endl;
 }
 
@@ -122,7 +122,7 @@ int	main(void){
 		createDocs(folder);
 	}
 	catch (std::exception &e){
-		std::cout << RED "System created an invalid document!\nError: " 
+		std::cout << RED "System created an invalid form!\nError: " 
 		<< e.what() << "\nSystem made " << countDocs(folder) << " forms and stopped," reset << std::endl; 
 	}
 

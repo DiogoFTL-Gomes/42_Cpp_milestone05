@@ -1,11 +1,12 @@
 #include "RobotomyRequestForm.hpp"
+#include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() 
-	: AForm("RobotomyRequestForm", 145, 137), _target(""){
+	: AForm("RobotomyRequestForm", 72, 45), _target(""){
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) 
-	: AForm("RobotomyRequestForm", 145, 137), _target(target){
+	: AForm("RobotomyRequestForm", 72, 45), _target(target){
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) 
@@ -29,11 +30,11 @@ const std::string	&RobotomyRequestForm::getTarget() const{
 
 //executor
 void RobotomyRequestForm::executeAction() const {
-	std::cout << "\n******  DrrriDRRrriiDrrrriillliiiiiiiiiinnng noises  ******" << std::endl;
-	if (rand() % 2){
-		std::cout << this->getName() << " has been successfully robotomized!!" << std::endl;
+	std::cout << "******  DrrriDRRrriiDrrrriillliiiiiiiiiinnng noises  ******" << std::endl;
+	if (std::rand() % 2){
+		std::cout << this->getTarget() << YEL " has been successfully robotomized!!" reset << std::endl;
 	}
 	else{
-		std::cout << "Sorry, the Robotomy has failed." << std::endl;
+		std::cout << RED "Sorry, the Robotomy has failed." reset << std::endl;
 	}
 }

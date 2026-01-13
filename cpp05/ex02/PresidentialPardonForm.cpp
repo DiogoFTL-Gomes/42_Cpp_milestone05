@@ -1,11 +1,11 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm() 
-	: AForm("PresidentialPardonForm", 145, 137), _target(""){
+	: AForm("PresidentialPardonForm", 25, 5), _target(""){
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string &target) 
-	: AForm("PresidentialPardonForm", 145, 137), _target(target){
+	: AForm("PresidentialPardonForm", 25, 5), _target(target){
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) 
@@ -29,5 +29,5 @@ const std::string	&PresidentialPardonForm::getTarget() const{
 
 //executor
 void PresidentialPardonForm::executeAction() const {
-	std::cout << this->getTarget() << " has been pardoned by  Zaphod Beeblebrox." << std::endl;
+	std::cout << this->getTarget() << YEL " has been pardoned by Zaphod Beeblebrox." reset << std::endl;
 }

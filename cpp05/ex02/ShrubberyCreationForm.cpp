@@ -1,5 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
+#include <cstdlib>
 
 ShrubberyCreationForm::ShrubberyCreationForm() 
 	: AForm("ShrubberyCreationForm", 145, 137), _target(""){
@@ -30,8 +31,22 @@ const std::string	&ShrubberyCreationForm::getTarget() const{
 
 //executor
 void ShrubberyCreationForm::executeAction() const {
+	int height = (std::rand() % 5) + 3;
 	std::ofstream file((_target + "_shrubbery").c_str());
-	file << "  🌳\n";
-	file << " 🌲🌲\n";
-	file << "🌳🌳🌳\n";
+
+	for (int row = 0; row < height; row++)
+	{
+		for (int space = 0; space < height - row - 1; space++)
+			file << " ";
+		for (int leaf = 0; leaf < (row * 2) + 1; leaf++)
+			file << "*";
+
+		file << "\n";
+	}
+	for (int t = 0; t < 2; t++)
+	{
+		for (int space = 0; space < height - 1; space++)
+			file << " ";
+		file << "|\n";
+	}
 }
