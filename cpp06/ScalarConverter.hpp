@@ -11,6 +11,8 @@ class ScalarConverter{
 		~ScalarConverter();
 
 		static bool	isPseudoNumb(const std::string &literal);
+		static bool	isChar(const std::string &literal);
+		static bool	isNumber(const std::string &literal);
 
 	public:
 		static void convert(const std::string &literal);
