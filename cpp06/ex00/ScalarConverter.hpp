@@ -10,9 +10,14 @@ class ScalarConverter{
 		ScalarConverter	&operator=(const ScalarConverter&);
 		~ScalarConverter();
 
-		static bool	isPseudoNumb(const std::string &literal);
+		static bool	isPseudoLiteral(const std::string &literal);
 		static bool	isChar(const std::string &literal);
 		static bool	isNumber(const std::string &literal);
+
+		//output
+		static void	outputPseudoLiteral(const std::string &literal);
+		static void	outputChar(const std::string &literal);
+		static void	outputNumbers(const std::string &literal);
 
 	public:
 		static void convert(const std::string &literal);
