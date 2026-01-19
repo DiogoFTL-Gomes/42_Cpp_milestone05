@@ -4,6 +4,7 @@
 #include <limits>
 #include <cstdlib>
 #include <iomanip>
+#include <cmath>
 
 void	ScalarConverter::convert(const std::string &literal){
 	if (isPseudoLiteral(literal)){
@@ -16,7 +17,10 @@ void	ScalarConverter::convert(const std::string &literal){
 		outputNumbers(literal);
 	}
 	else {
-		std::cout << "Parameter \"" << literal << "\" is not a valid argument" << std::endl;
+		std::cout << "char:	impossible\n";
+		std::cout << "int:	impossible\n";
+		std::cout << "float:	impossible\n";
+		std::cout << "double:	impossible" << std::endl;
 	}
 }
 
@@ -122,5 +126,37 @@ void	ScalarConverter::outputChar(const std::string &literal){
 }
 
 void	ScalarConverter::outputNumbers(const std::string &literal){
+	char	c;
+	int		i;
+	float	f;
+	double	d;
 
+	d = std::strtod(literal.c_str(), NULL);
+	f = static_cast<float>(d);
+	if (d == static_cast<long>(d) && d >= std::numeric_limits<unsigned char>::min() && d <= std::numeric_limits<char>::max()){
+		c = static_cast<char>(d);
+		if (std::isprint(static_cast<unsigned char>(c))){
+			std::cout << "char:	" << c << "\n";
+		}
+		else{
+			std::cout << "char:	Non displayable\n";
+		}
+	}
+	else{
+		std::cout << "char:	impossible\n";
+	}
+
+	if (d == static_cast<long>(d) && d >= std::numeric_limits<int>::min() && d <= std::numeric_limits<int>::max()){
+		i = static_cast<int>(d);
+		std::cout << "int:	" << i << "\n";
+	}
+	else{
+		std::cout << "int:	impossible\n";
+	}
+	
+	if (literal.find('.') == literal.npos){
+		std::cout << std::fixed << std::setprecision(1);
+	}
+	std::cout << "float:	" << f << "f\n";
+	std::cout << "double:	" << d << std::endl;
 }

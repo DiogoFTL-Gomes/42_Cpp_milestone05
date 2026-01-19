@@ -18,6 +18,8 @@ class ScalarConverter{
 		static void	outputPseudoLiteral(const std::string &literal);
 		static void	outputChar(const std::string &literal);
 		static void	outputNumbers(const std::string &literal);
+		static void	outputInt(const std::string &literal);
+		static void	outputFloat(const std::string &literal);
 
 	public:
 		static void convert(const std::string &literal);
