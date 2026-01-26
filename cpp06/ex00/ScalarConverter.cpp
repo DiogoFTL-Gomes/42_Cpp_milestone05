@@ -106,7 +106,7 @@ void	ScalarConverter::outputPseudoLiteral(const std::string &literal){
 		}
 	}
 	std::cout << "float:	" << f << "f\n";
-	std::cout << "double:	" << d << "\n" << std::endl;
+	std::cout << "double:	" << d  << std::endl;
 }
 
 void	ScalarConverter::outputChar(const std::string &literal){
@@ -154,7 +154,7 @@ void	ScalarConverter::outputNumbers(const std::string &literal){
 		std::cout << "int:	impossible\n";
 	}
 	
-	if (literal.find('.') == literal.npos){
+	if (d == static_cast<long>(d)){
 		std::cout << std::fixed << std::setprecision(1);
 	}
 	std::cout << "float:	" << f << "f\n";
