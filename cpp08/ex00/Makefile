@@ -1,14 +1,9 @@
-NAME = concreteForms
+NAME = easyfind
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRC = 	main.cpp \
-		Bureaucrat.cpp \
-		AForm.cpp \
-		PresidentialPardonForm.cpp \
-		RobotomyRequestForm.cpp \
-		ShrubberyCreationForm.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -22,6 +17,5 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f *_shrubbery
 
 re: fclean all
