@@ -37,16 +37,16 @@ Array<T>::~Array(){
 
 template <typename T>
 T	&Array<T>::operator[](unsigned int index){
-    if (index >= _size){
-        throw std::exception();
+	if (index >= _size){
+		throw std::exception();
 	}
 	return (this->_data[index]);
 }
 
 template <typename T>
 const T	&Array<T>::operator[](unsigned int index) const{
-    if (index >= _size){
-        throw std::exception();
+	if (index >= _size){
+		throw std::exception();
 	}
 	return (this->_data[index]);
 }

@@ -40,8 +40,8 @@ int	main(void){
 	testTContainer(l, 42);
 	testTContainer(l, 24);
 
-    std::cout << "\n===Testing DEQUE===" << std::endl;
-    std::deque<int> d;
+	std::cout << "\n===Testing DEQUE===" << std::endl;
+	std::deque<int> d;
 	d.push_back(162);
 	d.push_back(251);
 	d.push_back(345);

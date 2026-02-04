@@ -43,8 +43,8 @@ bool	ScalarConverter::isChar(const std::string &literal){
 bool	ScalarConverter::isNumber(const std::string &literal){
 	size_t	i = 0;
 	bool	dot = false;
-    bool	digit_before = false;
-    bool	digit_after = false;
+	bool	digit_before = false;
+	bool	digit_after = false;
 
 	if (literal.empty()){
 		return (false);

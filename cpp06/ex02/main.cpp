@@ -6,21 +6,21 @@
 
 int main(void)
 {
-    std::srand(std::time(NULL));
+	std::srand(std::time(NULL));
 
-    for (int i = 0; i < 10; i++)
-    {
-        Base *p = generate();
+	for (int i = 0; i < 10; i++)
+	{
+		Base *p = generate();
 
-        std::cout << "Pointer identify: ";
-        identify(p);
+		std::cout << "Pointer identify: ";
+		identify(p);
 
-        std::cout << "Reference identify: ";
-        identify(*p);
+		std::cout << "Reference identify: ";
+		identify(*p);
 
-        delete p;
-        std::cout << "-----" << std::endl;
-    }
+		delete p;
+		std::cout << "-----" << std::endl;
+	}
 
-    return 0;
+	return 0;
 }
