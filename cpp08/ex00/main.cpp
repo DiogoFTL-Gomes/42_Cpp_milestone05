@@ -30,7 +30,7 @@ int	main(void){
 	testTContainer(v, 24);
 	
 	std::cout << "\n===Testing LIST===" << std::endl;
-	std::vector<int> l;
+	std::list<int> l;
 	l.push_back(62);
 	l.push_back(42);
 	l.push_back(51);
