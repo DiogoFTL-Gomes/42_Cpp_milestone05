@@ -2,8 +2,8 @@
 # define SPAN_HPP
 
 #include <vector>
-#include <iterator>
 #include <exception>
+#include <cstddef>
 
 class Span {
 	private:
