@@ -32,7 +32,7 @@ const std::string	&ShrubberyCreationForm::getTarget() const{
 //executor
 void ShrubberyCreationForm::executeAction() const {
 	int height = (std::rand() % 5) + 3;
-	std::ofstream file((_target + "_shrubbery").c_str());
+	std::ofstream file(("shrubbery_" + _target).c_str());
 
 	for (int row = 0; row < height; row++)
 	{

@@ -8,6 +8,7 @@ int	main(void){
 	//Creating top ranking bureaucrat
 	Bureaucrat boss("Almeida", 2);
 	std::cout << "A bureaucrat has been created:\n" << boss << "\n" << std::endl;
+
 	//Getting rank to the top. Experimenting with loops inside try catch
 	std::cout << YEL << boss.getName() << " bureaucrat is greedy and tries to get a better rank,\nbut he forgets that bureaucracy is inefficient:" reset << std::endl;
 	for (int i = 0; i < 6; i++){
@@ -32,7 +33,7 @@ int	main(void){
 	std::cout << "A bureaucrat has been created:\n" << intern << "\n" << std::endl;
 
 	//Moving grade past lower limit
-	std::cout << YEL << boss.getName() << " thinks that " << intern.getGrade() << " is too much power in the hands of an intern and tries to demote him:" reset << std::endl;
+	std::cout << YEL << boss.getName() << " thinks that " << intern.getGrade() << " is too much power in the hands of an intern \nand tries to demote him:" reset << std::endl;
 	try{
 		intern.decrementGrade();
 		std::cout << "A bureaucrat is now:\n" << intern << "\n" << std::endl;
@@ -43,11 +44,11 @@ int	main(void){
 	}
 
 	//setting up operator= example
-	std::cout << YEL << "Fustrated, " << boss.getName() << " lets " << intern.getName() << " get to work. After a few weeks he decides to spread the wealth...by hiring his wife´s cousin:" reset << std::endl;
+	std::cout << YEL << "Fustrated, " << boss.getName() << " lets " << intern.getName() << " get to work. After a few weeks \nhe decides to spread the wealth...by hiring his wife´s cousin:" reset << std::endl;
 	Bureaucrat nepoBaby("Silva", 50);
 	std::cout << "A third bureaucrat has been created:\n" << nepoBaby << "\n" << std::endl;
 	
-	std::cout << YEL << intern.getName() << " is furious! He slaves way and nepotism wins the day!! He goes on strike!\n" << boss.getName() << " knows that if he raises " << intern.getName() << "'s rank, he'll never work properly again.\nA new intern must be hired to pick up the slack" reset << std::endl;
+	std::cout << YEL << intern.getName() << " is furious! He slaves way and nepotism wins the day!! \nHe goes on strike! " << boss.getName() << " knows that if he raises " << intern.getName() << "'s \nrank, he'll never work properly again. \nA new intern must be hired to pick up the slack" reset << std::endl;
 	Bureaucrat newIntern(intern);
 	std::cout << "A new bureaucrat has been created:\n" << newIntern << "\n" << std::endl;
 	intern = nepoBaby;

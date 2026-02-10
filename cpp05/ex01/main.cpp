@@ -89,13 +89,13 @@ int	main(void){
 		Bureaucrat	boss("Ramiro", 5);
 		std::cout << boss << YEL " has entered the office." reset << std::endl;
 
-		std::cout << "To start the day, the proper forms need to be created and signed in triplicate:" << std::endl;
+		std::cout << "To start the day, the proper forms need to be created \nand signed in triplicate:" << std::endl;
 		Form	startDay("Authorize work day start", 50, 40);
 		std::cout << YEL "\n--- Form created ---\n" reset << startDay << "\n" << std::endl;
 
 		boss.signForm(startDay);
 		std::cout << "\nInstead of creating and signing two more forms, " << boss.getName() 
-			<< " just copies the \"" << startDay.getName() << "\"\n that he signed before. A serious break from procedure, but hey, he's the boss..." << std::endl;
+			<< " \njust copies the \"" << startDay.getName() << "\" that he signed \nbefore. A serious break from procedure, but hey, he's the boss..." << std::endl;
 
 		std::cout << "\nCopying \"" << startDay.getName() << "\"" << std::endl;
 		Form	dupliForm(startDay);

@@ -22,6 +22,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f *_shrubbery
+	rm -f shrubbery_*
 
 re: fclean all
