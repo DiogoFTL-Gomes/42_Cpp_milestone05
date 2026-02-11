@@ -20,9 +20,9 @@ int	main(void){
 
 	std::cout << test.size() << std::endl;
 
-	ItMapStrInt duh = test.find("1977-07-05");
-	if (duh != test.end()){
-		std::cout << duh->first << " => " << duh->second << std::endl;
+	it = test.find("1977-07-05");
+	if (it != test.end()){
+		std::cout << it->first << " => " << it->second << std::endl;
 	}
 	else{
 		std::cout << "Unable to find entry" << std::endl;

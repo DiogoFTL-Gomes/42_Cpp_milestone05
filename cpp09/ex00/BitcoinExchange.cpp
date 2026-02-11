@@ -5,7 +5,10 @@
 
 BitcoinExchange::BitcoinExchange(const std::string &file){
 	std::ifstream dataFile(file);
-	if (!dataFile.is_open())
+	if (!dataFile.is_open()){
+		std::cerr << "Could not open file: " << file << std::endl;
+		exit (1);
+	}
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _baseData(other._baseData) {
