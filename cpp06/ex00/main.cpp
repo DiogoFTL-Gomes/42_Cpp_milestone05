@@ -3,7 +3,7 @@
 
 int	main(int argc, const char *argv[]){
 	if (argc == 1){
-		std::cout << "convert need 1 valid parameter" << std::endl;
+		std::cout << "convert needs 1 valid parameter" << std::endl;
 		return (0);
 	}
 	ScalarConverter::convert(argv[1]);

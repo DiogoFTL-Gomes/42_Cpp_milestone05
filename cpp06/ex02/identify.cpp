@@ -43,6 +43,7 @@ void	identify(Base &p){
 	}
 	catch (std::exception&){
 	}
+
 	try {
 		(void)dynamic_cast<C &>(p);
 		std::cout << "C" << std::endl;
