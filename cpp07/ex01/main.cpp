@@ -27,24 +27,24 @@ void printConstT(const T &x) {
 	std::cout << x << " ";
 }
 
-int main() {
+int main(void) {
 	int a[] = {1, 2, 3};
 	const int b[] = {4, 5, 6};
 
-	std::cout << "print() addr:	";
+	std::cout << "print() addr:		";
 	iter(a, 3, print);
-	std::cout << "inc() addr:	";
+	std::cout << "inc() addr:		";
 	iter(a, 3, inc);
 	std::cout << "printConst() addr:	";
 	iter(a, 3, printConst);
-	std::cout << "printT() addr:	";
+	std::cout << "printT() addr:		";
 	iter(a, 3, printT);
 	std::cout << "printConstT() addr:	";
 	iter(a, 3, printConstT);
 
 	std::cout << "printConst() addr:	";
 	iter(b, 3, printConst);
-	std::cout << "printT() addr:	";
+	std::cout << "printT() addr:		";
 	iter(b, 3, printT);
 	std::cout << "printConstT() addr:	";
 	iter(b, 3, printConstT);
