@@ -4,7 +4,7 @@
 #include <fstream>
 
 BitcoinExchange::BitcoinExchange(const std::string &file){
-	std::ifstream dataFile(file);
+	std::ifstream dataFile("data.csv");
 	if (!dataFile.is_open()){
 		std::cerr << "Could not open file: " << file << std::endl;
 		exit (1);
