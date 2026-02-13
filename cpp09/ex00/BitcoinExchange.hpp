@@ -11,10 +11,12 @@ class BitcoinExchange {
 	public:
 		typedef std::map<std::string, float>::iterator	MapIter;
 
-		BitcoinExchange(const std::string &file);
+		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &other);
 		BitcoinExchange &operator=(const BitcoinExchange &other);
 		~BitcoinExchange();
+
+		void	processInput(const std::string &input) const;
 };
 
 #endif

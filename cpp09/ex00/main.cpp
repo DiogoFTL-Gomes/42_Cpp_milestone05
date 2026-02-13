@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <map>
+#include <stdexcept>
 #include "BitcoinExchange.hpp"
 
 int	main(int argc, char **argv){
@@ -11,6 +11,13 @@ int	main(int argc, char **argv){
 		return (1);
 	}
 
-	BitcoinExchange checker(argv[1]);
+	try	{
+		BitcoinExchange bitcoinData;
+		bitcoinData.processInput(argv[1]);
+	}
+	catch (const std::exception &e){
+		std::cerr << e.what() << std::endl;
+		return (1);
+	}
 	return (0);
 }
