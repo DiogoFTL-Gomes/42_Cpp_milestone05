@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <stdexcept>
+#include <ctime>
 
 BitcoinExchange::BitcoinExchange(){
 	std::ifstream dataFile("data.csv");
@@ -25,7 +26,6 @@ BitcoinExchange::BitcoinExchange(){
 		float value = std::atof((dataString.substr(pos + 1)).c_str());
 		_baseData[date] = value;
 	}
-	dataFile.close();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _baseData(other._baseData) {
@@ -42,5 +42,14 @@ BitcoinExchange::~BitcoinExchange(){
 }
 
 void	BitcoinExchange::processInput(const std::string &input) const{
-	(void)input;
+	std::ifstream inputFile(input.c_str());
+	if (!inputFile.is_open()){
+		std::cerr << "Error: Could not open file: \"" << input << "\"" << std::endl;
+		exit (1);
+	}
+	std::string	inputString;
+	std::getline(inputFile, inputString);
+	if (inputString != "date | value"){
+		throw std::runtime_error("Error: File: \"" + input + "\" has incorrect header");
+	}
 }
