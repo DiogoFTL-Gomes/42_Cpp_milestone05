@@ -8,8 +8,12 @@ class BitcoinExchange {
 	private:
 		std::map<std::string, float>	_baseData;
 
+		bool	validateDate(const std::string &date) const;
+		bool	validateValue(const std::string &value) const;
+
 	public:
 		typedef std::map<std::string, float>::iterator	MapIter;
+		typedef std::map<std::string, float>::const_iterator	Const_MapIter;
 
 		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &other);
