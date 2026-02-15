@@ -102,7 +102,7 @@ bool	BitcoinExchange::validateDate(const std::string &date) const{
 		if (i == 4 || i == 7){
 			continue;
 		}
-		if (!std::isdigit(date[i])){
+		if (!std::isdigit(static_cast<unsigned char>(date[i]))){
 			std::cout << "Error: Date must be digits => " << date << std::endl;
 			return false;
 		}
