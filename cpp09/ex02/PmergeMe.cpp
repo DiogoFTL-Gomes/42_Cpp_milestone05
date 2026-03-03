@@ -10,17 +10,19 @@
 #include <iomanip>
 
 PMergeMe::PMergeMe(char **lines){
-	importValues(lines);
+	this->importValues(lines);
 	this->_deq = std::deque<int>(this->_vec.begin(), this->_vec.end());
 
 	std::cout << "Before: ";
-	printPMergeMe(this->_vec);
+	this->printPMergeMe(this->_vec);
 	std::cout << std::endl;
+
 
 	clock_t start = std::clock();
 	this->sortPMergeMe(this->_vec);
 	clock_t end = std::clock();
 	this->_vecTime = (double)(end - start) * 1000000.0 / CLOCKS_PER_SEC;
+
 	start = std::clock();
 	this->sortPMergeMe(this->_deq);
 	end = std::clock();
@@ -37,7 +39,7 @@ PMergeMe::PMergeMe(char **lines){
 		  << std::endl;
 	std::cout << "Time to process a range of "
 		  << _deq.size()
-		  << " elements with std::vector : "
+		  << " elements with std::deque : "
 		  << this->_deqTime << " us"
 		  << std::endl;
 }
