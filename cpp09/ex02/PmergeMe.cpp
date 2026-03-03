@@ -9,26 +9,28 @@
 
 PMergeMe::PMergeMe(char **lines){
 	importValues(lines);
+	//this->_deq = std::deque<int>(this->_vec.begin(), this->_vec.end());
 
-	this->_deq = std::deque<int>(this->_vec.begin(), this->_vec.end());
-	std::cout << "Before: ";
+	std::cout << "Before: \n";
 	printVec();
 	std::cout << std::endl;
-	printDeq();
+	//printDeq();
+	//std::cout << std::endl;
+
+	this->sortVec(this->_vec);
+	//this->sortDeq(this->_deq);
+
+	std::cout << "After: \n";
+	printVec();
 	std::cout << std::endl;
-
-	sortVec(this->_vec);
-	sortDeq(this->_deq);
-
-	std::cout << "After: ";
-	std::cout << std::endl;
-
+	//printDeq();
+	//std::cout << std::endl;
 }
 
 PMergeMe::PMergeMe(const PMergeMe &other) : _vec(other._vec), _deq(other._deq) {
 }
 
-PMergeMe &	PMergeMe::operator=(const PMergeMe &other){
+PMergeMe	&PMergeMe::operator=(const PMergeMe &other){
 	if (this != &other){
 		this->_vec = other._vec;
 		this->_deq = other._deq;
@@ -37,7 +39,6 @@ PMergeMe &	PMergeMe::operator=(const PMergeMe &other){
 }
 
 PMergeMe::~PMergeMe(){
-	std::cout << "Bye Bye" << std::endl;
 }
 
 void	PMergeMe::importValues(char **lines){
@@ -70,7 +71,7 @@ void	PMergeMe::sortVec(std::vector<int> &mainChain){
 	if (mainChain.size() < 2){
 		return;
 	}
-	int	leftOver;
+	int	leftOver = -1;
 	std::vector<int>	stayV;
 	std::vector<int>	mainV;
 	for (size_t i = 0; i < mainChain.size();){
@@ -87,6 +88,7 @@ void	PMergeMe::sortVec(std::vector<int> &mainChain){
 	}
 
 	std::vector<size_t> jacobsthal = generateJacobsthalOrder(stayV.size());
+	std::cout << std::endl;
 
 	for (size_t k = 0; k < jacobsthal.size(); ++k){
 		size_t idx = jacobsthal[k];
@@ -95,6 +97,11 @@ void	PMergeMe::sortVec(std::vector<int> &mainChain){
 		size_t pos = binarySearch(mainV, value);
 		mainV.insert(mainV.begin() + pos, value);
 	}
+	if (leftOver != -1){
+		size_t pos = binarySearch(mainV, leftOver);
+		mainV.insert(mainV.begin() + pos, leftOver);
+	}
+	mainChain = mainV;
 }
 
 size_t	PMergeMe::binarySearch(std::vector<int>	&mainV, int value){
@@ -113,32 +120,37 @@ size_t	PMergeMe::binarySearch(std::vector<int>	&mainV, int value){
 	return (left);
 }
 
-std::vector<size_t>	PMergeMe::generateJacobsthalOrder(size_t size){
-	std::vector<size_t>	jacobsthal;
+std::vector<size_t> PMergeMe::generateJacobsthalOrder(size_t size){
+	std::vector<size_t> order;
 
-	size_t	prev2 = 0;
-	size_t	prev1 = 1;
-	while (true){
-		size_t	current = prev1 + 2 * prev2;
-		bool	isBigger = false;
+	if (size == 0)
+		return order;
+
+	order.push_back(0);
+
+	size_t prev2 = 0;
+	size_t prev1 = 1;
+
+	while (true)
+	{
+		size_t current = prev1 + 2 * prev2;
 
 		if (current > size){
 			current = size;
-			isBigger = true;
 		}
 
 		for (size_t i = current; i > prev1; --i){
-			jacobsthal.push_back(i - 1);
+			order.push_back(i - 1);
 		}
 
-		if (isBigger == true){
+		if (current == size)
 			break;
-		}
+
 		prev2 = prev1;
 		prev1 = current;
 	}
 
-	return (jacobsthal);
+	return order;
 }
 
 void	PMergeMe::compareSendValues(std::vector<int> &stayV, std::vector<int> &mainV, int a, int b){

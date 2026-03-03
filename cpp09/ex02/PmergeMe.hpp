@@ -11,14 +11,14 @@ class PMergeMe {
 		std::vector<int>	_vec;
 		std::deque<int>		_deq;
 
-		void	importValues(char **lines);
-		void	printVec();
-		void	printDeq();
-		void	sortVec(std::vector<int> &vecMain);
-		void	sortDeq(std::deque<int> &deqMain);
-		void	compareSendValues(std::vector<int> &stayV, std::vector<int> &mainV, int a, int b);
+		void				importValues(char **lines);
+		void				printVec();
+		void				printDeq();
+		void				sortVec(std::vector<int> &vecMain);
+		void				sortDeq(std::deque<int> &deqMain);
+		void				compareSendValues(std::vector<int> &stayV, std::vector<int> &mainV, int a, int b);
+		size_t				binarySearch(std::vector<int>	&mainV, int value);
 		std::vector<size_t>	generateJacobsthalOrder(size_t size);
-		size_t	binarySearch(std::vector<int>	&mainV, int value);
 
 	public:
 		PMergeMe(char **lines);
