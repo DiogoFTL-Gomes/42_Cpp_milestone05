@@ -1,18 +1,20 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include "PmergeMe.hpp"
 
 int	main(int argc, char **argv){
 	if (argc < 2){
-		std::cout << "Error" << std::endl;
+		std::cerr << "Error" << std::endl;
 		return (1);
 	}
 
-	std::string param = "";
-	for (int i = 1; argv[i]; ++i){
-		param = param + " " + argv[i];
+	try{
+		PMergeMe test(argv);
+	}
+	catch (const std::exception &e){
+		std::cerr << e.what() << std::endl;
 	}
 
-	std::cout << param << std::endl;
 	return (0);
 }
