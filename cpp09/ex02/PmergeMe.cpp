@@ -2,29 +2,44 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <deque>
 #include <cstdlib>
 #include <climits>
 #include <sstream>
-
+#include <ctime>
+#include <iomanip>
 
 PMergeMe::PMergeMe(char **lines){
 	importValues(lines);
-	//this->_deq = std::deque<int>(this->_vec.begin(), this->_vec.end());
+	this->_deq = std::deque<int>(this->_vec.begin(), this->_vec.end());
 
-	std::cout << "Before: \n";
-	printVec();
+	std::cout << "Before: ";
+	printPMergeMe(this->_vec);
 	std::cout << std::endl;
-	//printDeq();
-	//std::cout << std::endl;
 
-	this->sortVec(this->_vec);
-	//this->sortDeq(this->_deq);
+	clock_t start = std::clock();
+	this->sortPMergeMe(this->_vec);
+	clock_t end = std::clock();
+	this->_vecTime = (double)(end - start) * 1000000.0 / CLOCKS_PER_SEC;
+	start = std::clock();
+	this->sortPMergeMe(this->_deq);
+	end = std::clock();
+	this->_deqTime = (double)(end - start) * 1000000.0 / CLOCKS_PER_SEC;
 
-	std::cout << "After: \n";
-	printVec();
+	std::cout << "After: ";
+	printPMergeMe(this->_deq);
 	std::cout << std::endl;
-	//printDeq();
-	//std::cout << std::endl;
+
+	std::cout << "Time to process a range of "
+		  << _vec.size()
+		  << " elements with std::vector : "
+		  << this->_vecTime << " us"
+		  << std::endl;
+	std::cout << "Time to process a range of "
+		  << _deq.size()
+		  << " elements with std::vector : "
+		  << this->_deqTime << " us"
+		  << std::endl;
 }
 
 PMergeMe::PMergeMe(const PMergeMe &other) : _vec(other._vec), _deq(other._deq) {
@@ -67,7 +82,7 @@ void	PMergeMe::importValues(char **lines){
 	}
 }
 
-void	PMergeMe::sortVec(std::vector<int> &mainChain){
+void	PMergeMe::sortPMergeMe(std::vector<int> &mainChain){
 	if (mainChain.size() < 2){
 		return;
 	}
@@ -84,11 +99,46 @@ void	PMergeMe::sortVec(std::vector<int> &mainChain){
 	}
 
 	if (mainV.size() > 1){
-		sortVec(mainV);
+		sortPMergeMe(mainV);
 	}
 
 	std::vector<size_t> jacobsthal = generateJacobsthalOrder(stayV.size());
-	std::cout << std::endl;
+
+	for (size_t k = 0; k < jacobsthal.size(); ++k){
+		size_t idx = jacobsthal[k];
+		int value = stayV[idx];
+
+		size_t pos = binarySearch(mainV, value);
+		mainV.insert(mainV.begin() + pos, value);
+	}
+	if (leftOver != -1){
+		size_t pos = binarySearch(mainV, leftOver);
+		mainV.insert(mainV.begin() + pos, leftOver);
+	}
+	mainChain = mainV;
+}
+
+void	PMergeMe::sortPMergeMe(std::deque<int> &mainChain){
+	if (mainChain.size() < 2){
+		return;
+	}
+	int	leftOver = -1;
+	std::deque<int>	stayV;
+	std::deque<int>	mainV;
+	for (size_t i = 0; i < mainChain.size();){
+		if (i + 1 == mainChain.size()){
+			leftOver = mainChain[i];
+			break;
+		}
+		compareSendValues(stayV, mainV, mainChain[i], mainChain[i + 1]);
+		i += 2;
+	}
+
+	if (mainV.size() > 1){
+		sortPMergeMe(mainV);
+	}
+
+	std::vector<size_t> jacobsthal = generateJacobsthalOrder(stayV.size());
 
 	for (size_t k = 0; k < jacobsthal.size(); ++k){
 		size_t idx = jacobsthal[k];
@@ -105,6 +155,22 @@ void	PMergeMe::sortVec(std::vector<int> &mainChain){
 }
 
 size_t	PMergeMe::binarySearch(std::vector<int>	&mainV, int value){
+	size_t	left = 0;
+	size_t	right = mainV.size();
+	while (left < right){
+		size_t	mid = left + (right - left) / 2;
+
+		if (value > mainV[mid]){
+			left = mid + 1;
+		}
+		else{
+			right = mid;
+		}
+	}
+	return (left);
+}
+
+size_t	PMergeMe::binarySearch(std::deque<int>	&mainV, int value){
 	size_t	left = 0;
 	size_t	right = mainV.size();
 	while (left < right){
@@ -164,14 +230,25 @@ void	PMergeMe::compareSendValues(std::vector<int> &stayV, std::vector<int> &main
 	}
 }
 
-void	PMergeMe::printVec(){
-	for (size_t i = 0; i < this->_vec.size(); ++i){
-		std::cout << this->_vec[i] << " ";
+void	PMergeMe::compareSendValues(std::deque<int> &stayV, std::deque<int> &mainV, int a, int b){
+	if (a < b){
+		stayV.push_back(a);
+		mainV.push_back(b);
+	}
+	else{
+		stayV.push_back(b);
+		mainV.push_back(a);
 	}
 }
 
-void	PMergeMe::printDeq(){
-	for (size_t i = 0; i < this->_deq.size(); ++i){
-		std::cout << this->_deq[i] << " ";
+void	PMergeMe::printPMergeMe(std::vector<int> &vecMain){
+	for (size_t i = 0; i < vecMain.size(); ++i){
+		std::cout << vecMain[i] << " ";
+	}
+}
+
+void	PMergeMe::printPMergeMe(std::deque<int> &vecMain){
+	for (size_t i = 0; i < vecMain.size(); ++i){
+		std::cout << vecMain[i] << " ";
 	}
 }
