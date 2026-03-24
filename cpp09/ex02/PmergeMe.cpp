@@ -89,35 +89,35 @@ void	PMergeMe::sortPMergeMe(std::vector<int> &mainChain){
 		return;
 	}
 	int	leftOver = -1;
-	std::vector<int>	stayV;
-	std::vector<int>	mainV;
+	std::vector<int>	lesserV;
+	std::vector<int>	biggerV;
 	for (size_t i = 0; i < mainChain.size();){
 		if (i + 1 == mainChain.size()){
 			leftOver = mainChain[i];
 			break;
 		}
-		compareSendValues(stayV, mainV, mainChain[i], mainChain[i + 1]);
+		compareSendValues(lesserV, biggerV, mainChain[i], mainChain[i + 1]);
 		i += 2;
 	}
 
-	if (mainV.size() > 1){
-		sortPMergeMe(mainV);
+	if (biggerV.size() > 1){
+		sortPMergeMe(biggerV);
 	}
 
-	std::vector<size_t> jacobsthal = generateJacobsthalOrder(stayV.size());
+	std::vector<size_t> jacobsthal = generateJacobsthalOrder(lesserV.size());
 
 	for (size_t k = 0; k < jacobsthal.size(); ++k){
 		size_t idx = jacobsthal[k];
-		int value = stayV[idx];
+		int value = lesserV[idx];
 
-		size_t pos = binarySearch(mainV, value);
-		mainV.insert(mainV.begin() + pos, value);
+		size_t pos = binarySearch(biggerV, value);
+		biggerV.insert(biggerV.begin() + pos, value);
 	}
 	if (leftOver != -1){
-		size_t pos = binarySearch(mainV, leftOver);
-		mainV.insert(mainV.begin() + pos, leftOver);
+		size_t pos = binarySearch(biggerV, leftOver);
+		biggerV.insert(biggerV.begin() + pos, leftOver);
 	}
-	mainChain = mainV;
+	mainChain = biggerV;
 }
 
 void	PMergeMe::sortPMergeMe(std::deque<int> &mainChain){
@@ -125,44 +125,44 @@ void	PMergeMe::sortPMergeMe(std::deque<int> &mainChain){
 		return;
 	}
 	int	leftOver = -1;
-	std::deque<int>	stayV;
-	std::deque<int>	mainV;
+	std::deque<int>	lesserV;
+	std::deque<int>	biggerV;
 	for (size_t i = 0; i < mainChain.size();){
 		if (i + 1 == mainChain.size()){
 			leftOver = mainChain[i];
 			break;
 		}
-		compareSendValues(stayV, mainV, mainChain[i], mainChain[i + 1]);
+		compareSendValues(lesserV, biggerV, mainChain[i], mainChain[i + 1]);
 		i += 2;
 	}
 
-	if (mainV.size() > 1){
-		sortPMergeMe(mainV);
+	if (biggerV.size() > 1){
+		sortPMergeMe(biggerV);
 	}
 
-	std::vector<size_t> jacobsthal = generateJacobsthalOrder(stayV.size());
+	std::vector<size_t> jacobsthal = generateJacobsthalOrder(lesserV.size());
 
 	for (size_t k = 0; k < jacobsthal.size(); ++k){
 		size_t idx = jacobsthal[k];
-		int value = stayV[idx];
+		int value = lesserV[idx];
 
-		size_t pos = binarySearch(mainV, value);
-		mainV.insert(mainV.begin() + pos, value);
+		size_t pos = binarySearch(biggerV, value);
+		biggerV.insert(biggerV.begin() + pos, value);
 	}
 	if (leftOver != -1){
-		size_t pos = binarySearch(mainV, leftOver);
-		mainV.insert(mainV.begin() + pos, leftOver);
+		size_t pos = binarySearch(biggerV, leftOver);
+		biggerV.insert(biggerV.begin() + pos, leftOver);
 	}
-	mainChain = mainV;
+	mainChain = biggerV;
 }
 
-size_t	PMergeMe::binarySearch(std::vector<int>	&mainV, int value){
+size_t	PMergeMe::binarySearch(std::vector<int>	&biggerV, int value){
 	size_t	left = 0;
-	size_t	right = mainV.size();
+	size_t	right = biggerV.size();
 	while (left < right){
 		size_t	mid = left + (right - left) / 2;
 
-		if (value > mainV[mid]){
+		if (value > biggerV[mid]){
 			left = mid + 1;
 		}
 		else{
@@ -172,13 +172,13 @@ size_t	PMergeMe::binarySearch(std::vector<int>	&mainV, int value){
 	return (left);
 }
 
-size_t	PMergeMe::binarySearch(std::deque<int>	&mainV, int value){
+size_t	PMergeMe::binarySearch(std::deque<int>	&biggerV, int value){
 	size_t	left = 0;
-	size_t	right = mainV.size();
+	size_t	right = biggerV.size();
 	while (left < right){
 		size_t	mid = left + (right - left) / 2;
 
-		if (value > mainV[mid]){
+		if (value > biggerV[mid]){
 			left = mid + 1;
 		}
 		else{
@@ -221,25 +221,25 @@ std::vector<size_t> PMergeMe::generateJacobsthalOrder(size_t size){
 	return order;
 }
 
-void	PMergeMe::compareSendValues(std::vector<int> &stayV, std::vector<int> &mainV, int a, int b){
+void	PMergeMe::compareSendValues(std::vector<int> &lesserV, std::vector<int> &biggerV, int a, int b){
 	if (a < b){
-		stayV.push_back(a);
-		mainV.push_back(b);
+		lesserV.push_back(a);
+		biggerV.push_back(b);
 	}
 	else{
-		stayV.push_back(b);
-		mainV.push_back(a);
+		lesserV.push_back(b);
+		biggerV.push_back(a);
 	}
 }
 
-void	PMergeMe::compareSendValues(std::deque<int> &stayV, std::deque<int> &mainV, int a, int b){
+void	PMergeMe::compareSendValues(std::deque<int> &lesserV, std::deque<int> &biggerV, int a, int b){
 	if (a < b){
-		stayV.push_back(a);
-		mainV.push_back(b);
+		lesserV.push_back(a);
+		biggerV.push_back(b);
 	}
 	else{
-		stayV.push_back(b);
-		mainV.push_back(a);
+		lesserV.push_back(b);
+		biggerV.push_back(a);
 	}
 }
 

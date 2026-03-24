@@ -20,3 +20,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+# ./PmergeMe `shuf -i 1-100000 -n 3000 | tr "\n" " "`
