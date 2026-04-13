@@ -28,16 +28,16 @@ PMergeMe::PMergeMe(char **lines){
 	end = std::clock();
 	this->_deqTime = (double)(end - start) * 1000000.0 / CLOCKS_PER_SEC;
 
-	std::cout << "After: ";
+	std::cout << "\nAfter: ";
 	printPMergeMe(this->_deq);
 	std::cout << std::endl;
 
-	std::cout << "Time to process a range of "
+	std::cout << "\nTime to process a range of "
 		  << _vec.size()
 		  << " elements with std::vector : "
 		  << this->_vecTime << " us"
 		  << std::endl;
-	std::cout << "Time to process a range of "
+	std::cout << "\nTime to process a range of "
 		  << _deq.size()
 		  << " elements with std::deque : "
 		  << this->_deqTime << " us"
